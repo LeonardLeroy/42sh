@@ -1,0 +1,25 @@
+/*
+** EPITECH PROJECT, 2025
+** 42sh
+** File description:
+** display_with_suggestion.c
+*/
+
+#include "header.h"
+
+void display_with_suggestion(const char *buffer, const char *suggestion,
+    int pos)
+{
+    char *last_word = get_last_word(buffer);
+    size_t len = strlen(last_word);
+    int added;
+
+    display_path(0);
+    printf("%s", buffer);
+    if (suggestion && suggestion[0])
+        printf(ANSI_COLOR_GRAY "%s" ANSI_COLOR_RESET, suggestion + len);
+    added = suggestion && suggestion[0] ? strlen(suggestion + len) : 0;
+    for (int i = strlen(buffer) + added; i > pos; i--)
+        printf("\033[D");
+    fflush(stdout);
+}
