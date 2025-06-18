@@ -9,14 +9,15 @@
 
 static void free_splitted(char ***splitted)
 {
-    for (int i = 0; (*splitted)[i]; i++) {
+    for (int i = 0; (*splitted)[i]; i++)
         free((*splitted)[i]);
-    }
     free(*splitted);
 }
 
 static void set_child_command(tree_t *child, char *new_command)
 {
+    if (child->command_allocated && child->command)
+        free(child->command);
     if (new_command && strlen(new_command) > 0) {
         child->command = my_strdup(new_command);
         child->command_allocated = 1;

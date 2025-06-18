@@ -11,9 +11,11 @@ void free_tree(tree_t *tree)
 {
     if (!tree)
         return;
-    if (tree->command_allocated)
+    if (tree->left)
+        free_tree(tree->left);
+    if (tree->right)
+        free_tree(tree->right);
+    if (tree->command_allocated && tree->command)
         free(tree->command);
-    free_tree(tree->left);
-    free_tree(tree->right);
     free(tree);
 }

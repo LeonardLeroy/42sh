@@ -19,7 +19,7 @@ static void permission_denied(char *used)
     my_puterror(": Permission denied.\n");
 }
 
-static int process_command(char **argv, int i, Global_t *global,
+static int process_command(char **argv, int i, global_t *global,
     CommandData_t *cmd_data)
 {
     cmd_data->processed_command = handle_inhibitions(argv[i]);
@@ -47,7 +47,7 @@ static int handle_execution_error(char *used)
     return ERROR;
 }
 
-int execute_command(char **argv, int i, Global_t *global)
+int execute_command(char **argv, int i, global_t *global)
 {
     CommandData_t cmd_data;
     int result;

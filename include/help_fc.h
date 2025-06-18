@@ -611,4 +611,35 @@ int my_str_isnum(char const *str);
 ////////////////////////////////////////////////////////////
 int my_str_isprintable(char const *str);
 
+typedef struct linked_list {
+    void *data;
+    struct linked_list *next;
+} linked_list_t;
+
+struct quick_sort_info {
+    linked_list_t *minus;
+    linked_list_t *plus;
+    linked_list_t *pivot;
+};
+
+linked_list_t *my_rev_list(linked_list_t *begin);
+int my_list_size(linked_list_t *begin);
+int my_apply_on_nodes(linked_list_t *begin, int (*f)(void *));
+int *add_node(linked_list_t *begin, void *value);
+void free_list(linked_list_t *begin, int (*f)(void *));
+linked_list_t *instantiate_linked_list(void);
+int my_delete_nodes(linked_list_t *begin, void *compare,
+    int (*f)(void *, void *));
+int is_empty(linked_list_t *begin);
+linked_list_t *quicksort(linked_list_t *begin,
+    int (*f)(linked_list_t *, void *, void *),
+    linked_list_t *comparator,
+    linked_list_t *(*cpy)(linked_list_t *));
+int merge_linked_list(linked_list_t *begin, linked_list_t *second_one);
+int my_apply_on_matching_nodes(linked_list_t *begin, int (*cmp)());
+int my_delete_nodes(linked_list_t *begin, void *compare,
+    int (*f)(void *, void *));
+void *my_find_node(linked_list_t *begin, void *cmp_data,
+    int (*f)(void *, void *));
+
 #endif /* !HELP_FC */

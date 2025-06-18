@@ -7,11 +7,12 @@
 
 #include "header.h"
 
-int or_gestion(tree_t *tree, int *result, Global_t *global)
+int or_gestion(tree_t *tree, int *result, global_t *global)
 {
-    if (!tree->left || !tree->right || !tree->left->command
-        || !tree->right->command)
-        return NOERROR;
+    if (!tree->left->command || !tree->right->command) {
+        my_puterror("Invalid null command.\n");
+        return ERROR;
+    }
     if (execute_tree(tree->left, result, global) == -1)
         return -1;
     if (*result == NOERROR)

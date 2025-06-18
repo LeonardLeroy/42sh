@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-int unsetenv_command(char *input, Global_t *global)
+int unsetenv_command(char *input, global_t *global)
 {
     char **args;
     char *after_input = NULL;

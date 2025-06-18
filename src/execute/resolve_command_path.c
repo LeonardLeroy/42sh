@@ -24,15 +24,17 @@ static char *search_command_path(const char *command, char *path_copy)
     return (char *) command;
 }
 
-char *resolve_command_path(Global_t *global, const char *command)
+char *resolve_command_path(global_t *global, const char *command)
 {
     char *path = NULL;
     char *path_copy = NULL;
     char *result = NULL;
 
+    if (access(command, X_OK) == 0)
+        return my_strdup(command);
     path = my_getenv(global, "PATH");
     if (!path)
-        return NULL;
+        path = PATH;
     path_copy = my_strdup(path);
     if (!path_copy)
         return NULL;

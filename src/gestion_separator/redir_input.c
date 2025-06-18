@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-int redir_input_gestion(tree_t *tree, int *result, Global_t *global)
+int redir_input_gestion(tree_t *tree, int *result, global_t *global)
 {
     char **args;
     int fd;

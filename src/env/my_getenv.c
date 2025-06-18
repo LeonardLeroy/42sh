@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-char *my_getenv(Global_t *global, char *name)
+char *my_getenv(global_t *global, char *name)
 {
     int len = my_strlen(name);
 

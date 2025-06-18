@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-const char *CHAR_TYPE[] = {NULL, "`", ";", "||", ">>", "<<", ">", "<", "&&",
+const char *CHAR_TYPE[] = {NULL, ";", "||", ">>", "<<", ">", "<", "&&",
     "|", "@"};
 
 static void update_is_in(tree_t *tree, char *LINE)
@@ -17,6 +17,12 @@ static void update_is_in(tree_t *tree, char *LINE)
         tree->type = PARENTHESES;
     else
         tree->type = QUOTES;
+}
+
+static void free_if_allocated(tree_t *tree)
+{
+    if (tree->command_allocated && tree->command)
+        free(tree->command);
 }
 
 void parse_by_char_in_tree(tree_t *tree, enum TYPES type)
@@ -31,6 +37,7 @@ void parse_by_char_in_tree(tree_t *tree, enum TYPES type)
         if (is_in) {
             update_is_in(tree, LINE);
         } else {
+            free_if_allocated(tree);
             tree->command = (char *)sep;
             tree->command_allocated = 0;
             tree->type = type;

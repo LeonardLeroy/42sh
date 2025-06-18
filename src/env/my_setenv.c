@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-char **my_setenv(Global_t *global, char *name, char *value)
+char **my_setenv(global_t *global, char *name, char *value)
 {
     int len = my_strlen(name);
     char *new_name = str_to_str(name, "=");

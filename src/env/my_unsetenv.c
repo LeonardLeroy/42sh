@@ -7,13 +7,13 @@
 
 #include "header.h"
 
-static void move_others(Global_t *global, int len, int i)
+static void move_others(global_t *global, int len, int i)
 {
     for (int j = i; j < len - 1; j++)
         (global->env)[j] = (global->env)[j + 1];
 }
 
-void my_unsetenv(Global_t *global, char *name)
+void my_unsetenv(global_t *global, char *name)
 {
     int len = my_array_len(global->env);
     int length = my_strlen(name);

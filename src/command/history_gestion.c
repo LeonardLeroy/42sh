@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-static void update_history(Global_t *global, char *new_history)
+static void update_history(global_t *global, char *new_history)
 {
     global->history[global->size_history] = new_history;
     global->history[global->size_history + 1] = NULL;
@@ -15,7 +15,7 @@ static void update_history(Global_t *global, char *new_history)
     global->index = global->size_history;
 }
 
-void gestion_history(Global_t *global, char *arg)
+void gestion_history(global_t *global, char *arg)
 {
     char *new_history = my_strdup(arg);
 

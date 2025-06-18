@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-int semi_colon_gestion(tree_t *tree, int *result, Global_t *global)
+int semi_colon_gestion(tree_t *tree, int *result, global_t *global)
 {
     if (tree->left && my_strlen(tree->left->command) != 0)
         if (execute_tree(tree->left, result, global) == -1)

@@ -42,6 +42,7 @@ CFLAGS	+=	-Wextra
 CFLAGS	+=	-Wpedantic
 CFLAGS	+=	-Wunused
 CFLAGS	+=	-Wunused-parameter
+CFLAGS	+=	-lm
 CFLAGS	+=	-L$(LIB_HF_PATH) -lhf
 CFLAGS	+=	-lncurses
 ifeq ($(ENV), dev)
@@ -85,6 +86,10 @@ $(NAME): make_libs $(OBJS)
 	&& $(call PRINT,COMPILED,$@)	\
 	|| $(call ERROR,BUILD FAILED,$@)
 
+### requirements
+requirements:
+	pip install -r bonus/requirements.txt
+
 ### clean
 make_clean_libs:
 	@make --no-print-directory clean -C $(LIB_HF_PATH)
@@ -115,6 +120,9 @@ re:	fclean all
 unit_tests:
 	@make --no-print-directory re -C $(TESTS_PATH)
 
+test: re
+	cd tests/tester/ && ./tester.sh
+
 tests_run:	unit_tests
 	@./$(TESTS_PATH)/unit_tests
 
@@ -125,8 +133,6 @@ branches:	tests_run
 	gcovr --exclude $(TESTS_PATH) --txt-metric branch
 
 coding-style:	fclean
-	./format.sh include/header.h
-	./format.sh include/help_fc.h
 	clear
 	mango
 

@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-void key_gestion_u(Global_t *global, int *pos, char *buffer)
+void key_gestion_u(global_t *global, int *pos, char *buffer)
 {
     for (int i = 0; i < global->size_prompt; i++)
         buffer[i] = buffer[i + *pos];

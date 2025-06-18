@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-static int gestion_arrows(int *pos, Global_t *global, char *seq)
+static int gestion_arrows(int *pos, global_t *global, char *seq)
 {
     if (seq[1] == 'A' && global->index > 0) {
         global->index--;
@@ -28,7 +28,7 @@ static int gestion_arrows(int *pos, Global_t *global, char *seq)
     return FALSE;
 }
 
-void key_gestion_arrow(Global_t *global, char *buffer, int *pos)
+void key_gestion_arrow(global_t *global, char *buffer, int *pos)
 {
     char seq[2];
     int temp;

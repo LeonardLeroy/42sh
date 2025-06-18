@@ -16,7 +16,7 @@ static int validate_args(char **args)
     return NOERROR;
 }
 
-static int handle_cd_path(char **args, Global_t *global, char *cwd)
+static int handle_cd_path(char **args, global_t *global, char *cwd)
 {
     char new_path[MAX_PATH];
 
@@ -43,7 +43,7 @@ static void cleanup_resources(char **args, char *input)
         my_array_free(&args);
 }
 
-int cd_command(char *input, Global_t *global)
+int cd_command(char *input, global_t *global)
 {
     char buf[SIZE_PATH];
     char *cwd = getcwd(buf, sizeof(char) * SIZE_PATH);

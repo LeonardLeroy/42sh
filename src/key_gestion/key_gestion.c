@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-void key_gestion_2(char c, int *pos, char *buffer, Global_t *global)
+void key_gestion_2(char c, int *pos, char *buffer, global_t *global)
 {
     switch (c) {
         case 11:
@@ -17,14 +17,15 @@ void key_gestion_2(char c, int *pos, char *buffer, Global_t *global)
             printf("exit\n");
             exit(NOERROR);
         case 12:
-            strcpy(buffer, "clear");
+            execute_one_command("clear", pos, global);
+            display_path(0);
             break;
         default:
             no_key_gestion(pos, buffer, c, global);
     }
 }
 
-void key_gestion(char c, int *pos, char *buffer, Global_t *global)
+void key_gestion(char c, int *pos, char *buffer, global_t *global)
 {
     switch (c) {
         case 127:

@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-static int pipe_left_gestion(tree_t *tree, int *result, Global_t *global,
+static int pipe_left_gestion(tree_t *tree, int *result, global_t *global,
     int pipefd[2])
 {
     int saved_stdout;
@@ -41,7 +41,7 @@ static int is_pipe_solo(tree_t *tree)
     return FALSE;
 }
 
-int pipe_gestion(tree_t *tree, int *result, Global_t *global)
+int pipe_gestion(tree_t *tree, int *result, global_t *global)
 {
     int pipefd[2];
     pid_t pid;

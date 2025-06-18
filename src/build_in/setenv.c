@@ -23,7 +23,7 @@ static int is_authorized(char *str)
     return TRUE;
 }
 
-int setenv_command(char *input, Global_t *global)
+int setenv_command(char *input, global_t *global)
 {
     char *after_input = NULL;
     char **args;

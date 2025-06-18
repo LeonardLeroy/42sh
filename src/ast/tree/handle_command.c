@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-static int execute_tree_next(tree_t *tree, int *result, Global_t *global)
+static int execute_tree_next(tree_t *tree, int *result, global_t *global)
 {
     if (my_strcmp(tree->command, "@") == 0)
         return arobase_gestion(tree, result, global);
@@ -16,8 +16,24 @@ static int execute_tree_next(tree_t *tree, int *result, Global_t *global)
     return execute_one_command(tree->command, result, global);
 }
 
-int handle_command(tree_t *tree, int *result, Global_t *global)
+static int check_redir_syntax(tree_t *tree)
 {
+    if ((my_strcmp(tree->command, "<<") == 0 ||
+        my_strcmp(tree->command, "<") == 0 ||
+        my_strcmp(tree->command, ">") == 0 ||
+        my_strcmp(tree->command, ">>") == 0) &&
+        (!tree->right || !tree->right->command ||
+            my_strlen(tree->right->command) == 0)) {
+        my_puterror("Missing name for redirect.\n");
+        return ERROR;
+    }
+    return NOERROR;
+}
+
+int handle_command(tree_t *tree, int *result, global_t *global)
+{
+    if (check_redir_syntax(tree) == ERROR)
+        return ERROR;
     if (my_strcmp(tree->command, ";") == 0)
         return semi_colon_gestion(tree, result, global);
     if (my_strcmp(tree->command, "|") == 0)

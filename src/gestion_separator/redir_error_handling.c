@@ -9,7 +9,11 @@
 
 int redir_handling(tree_t *tree)
 {
-    if (!tree->right || my_strlen(tree->right->command) == 0) {
+    if ((!tree->right || my_strlen(tree->right->command) == 0 ||
+        tree->right->command == NULL ||
+        my_strcmp(tree->right->command, "<<") == 0) ||
+        (!tree->left || tree->left->command == NULL ||
+        my_strcmp(tree->left->command, "<<") == 0)) {
         my_puterror("Missing name for redirect.\n");
         return ERROR;
     }

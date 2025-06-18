@@ -13,7 +13,7 @@ static int is_rounded(char *buffer, tree_t *tree)
         || sscanf(tree->command, "(%[^)])", buffer) == 1;
 }
 
-int parentheses_block(tree_t *tree, int *result, Global_t *global)
+int parentheses_block(tree_t *tree, int *result, global_t *global)
 {
     char buffer[1024];
     int status;

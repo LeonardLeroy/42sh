@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-void key_gestion_backspace(int *pos, Global_t *global, char *buffer)
+void key_gestion_backspace(int *pos, global_t *global, char *buffer)
 {
     if (*pos > 0) {
         for (int i = *pos - 1; i < global->size_prompt - 1; i++)

@@ -213,21 +213,19 @@ TESTS=
 [922-END]
 
 [923]
-NAME="env interdit \e[33mBizarre ça devrait marcher\e[0m"
+NAME="env interdit"
 SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RID ; export MYBG=4 ; export LVL=4 ; export NOTE=2"
 CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
 TESTS=
   echo -e "setenv 3test"
-  echo -e "env"
 [923-END]
 
 [924]
-NAME="env interdit \e[33mBizarre ça devrait marcher\e[0m"
+NAME="env interdit"
 SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RID ; export MYBG=4 ; export LVL=4 ; export NOTE=2"
 CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
 TESTS=
   echo -e "setenv test-2"
-  echo -e "env"
 [924-END]
 
 [925]
@@ -386,7 +384,7 @@ TESTS=
 [939-END]
 
 [940]
-NAME="only && \e[33mKO\e[0m"
+NAME="only &&"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -395,19 +393,51 @@ TESTS=
   echo "ls &&"
   echo "echo '==='"
   echo "&& ls"
+  echo "echo '==='"
+  echo "ls && l"
+  echo "echo '==='"
+  echo "l && ls"
 [940-END]
 
 [941]
-NAME="only || \e[33mKO\e[0m"
+NAME="only ||"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
   echo "||"
-  echo "echo '==='"
-  echo "ls ||"
-  echo "echo '==='"
-  echo "|| ls"
 [941-END]
+
+[942]
+NAME="only ||"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls ||"
+[942-END]
+
+[943]
+NAME="only ||"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "|| ls"
+[943-END]
+
+[944]
+NAME="only ||"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls || l"
+[944-END]
+
+[945]
+NAME="only ||"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "l || ls"
+[945-END]
 
 [1000]
 NAME="Simple ls command"
@@ -442,12 +472,12 @@ TESTS=
 [1003-END]
 
 [1004]
-NAME="Check static process info"
+NAME="Check static process info \e[33mune fois sur deux\e[0m"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
   echo 'ps -o pid,comm -p $$'
-[944-END]
+[1004-END]
 
 [1005]
 NAME="Check network interface"
@@ -455,7 +485,7 @@ SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
   echo 'cat /sys/class/net/lo/operstate'
-[945-END]
+[1005-END]
 
 [1006]
 NAME="Find a static file"
@@ -466,7 +496,7 @@ TESTS=
 [1006-END]
 
 [1008]
-NAME="Check memory usage"
+NAME="Check memory usage \e[33mune fois sur deux\e[0m"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -538,13 +568,11 @@ TESTS=
 [1105-END]
 
 [1106]
-NAME="cd to a file instead of a directory \e[33mKO\e[0m"
-SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
-CLEAN=""
+NAME="cd to a file instead of a directory"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'; touch testfile"
+CLEAN="rm -f testfile"
 TESTS=
-  echo "touch testfile"
   echo "cd testfile"
-  echo "rm testfile"
 [1106-END]
 
 [1107]
@@ -807,7 +835,7 @@ TESTS=
 [1409-END]
 
 [1500]
-NAME="Basic heredoc \e[33mKO\e[0m"
+NAME="Basic heredoc"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -817,7 +845,7 @@ TESTS=
 [1500-END]
 
 [1501]
-NAME="Heredoc with multiple lines \e[33mKO\e[0m"
+NAME="Heredoc with multiple lines"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -829,7 +857,7 @@ TESTS=
 [1501-END]
 
 [1502]
-NAME="Heredoc with variables (no expansion) \e[33mKO\e[0m"
+NAME="Heredoc with variables (no expansion)"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; export VAR='Hello'"
 CLEAN=""
 TESTS=
@@ -839,7 +867,7 @@ TESTS=
 [1502-END]
 
 [1503]
-NAME="Heredoc with variable expansion \e[33mKO\e[0m"
+NAME="Heredoc with variable expansion"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; export VAR='Hello'"
 CLEAN=""
 TESTS=
@@ -859,7 +887,7 @@ TESTS=
 [1504-END]
 
 [1505]
-NAME="Heredoc with an empty body \e[33mKO\e[0m"
+NAME="Heredoc with an empty body"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -878,7 +906,7 @@ TESTS=
 [1506-END]
 
 [1507]
-NAME="Heredoc inside a pipeline \e[33mKO\e[0m"
+NAME="Heredoc inside a pipeline"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -902,7 +930,7 @@ TESTS=
 [1508-END]
 
 [1509]
-NAME="Heredoc with a command substitution \e[33mKO\e[0m"
+NAME="Heredoc with a command substitution"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -983,6 +1011,7 @@ TESTS=
   echo "ls >> testfile"
   cat testfile
 [1608-END]
+
 [1700]
 NAME="Simple OR logic"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
@@ -1280,7 +1309,7 @@ TESTS=
 [6018-END]
 
 [6019]
-NAME="Antislash échappant un espace dans une commande dans les backticks"
+NAME="Antislash échappant un espace dans une commande dans les backticks \e[33mKO\e[0m"
 SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
 CLEAN=""
 TESTS=
@@ -1294,3 +1323,850 @@ CLEAN=""
 TESTS=
   echo "`echo \"Ends with backslash\\\\\"`"
 [6020-END]
+
+[7000]
+NAME="Backticks imbriqués avec des antislashs complexes \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "`echo \"Backslash \\ in \\`echo Nested\\` \\string\"`"
+[7000-END]
+
+[7001]
+NAME="Backticks avec commande multi-lignes imbriquées"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "`echo \"Line1: `echo \"NestedLine2\"`; Line3\"`"
+[7001-END]
+
+[7002]
+NAME="Command substitution avec antislashs échappant backticks"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "\\`echo \"\\`Nested backtick\\` and \\backslash\\\"`"
+[7002-END]
+
+[7003]
+NAME="Antislash échappant caractères spéciaux dans une commande complexe \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "\\`echo \"Special chars \\& \\| \\< \\>\"`"
+[7003-END]
+
+# [7004]
+# NAME="Backticks dans un script avec des commandes imbriquées"
+# SETUP="echo -e 'echo \"`echo Outer \\`echo Inner\\` Command\"' > complex_script.sh; chmod +x complex_script.sh"
+# CLEAN="rm -f complex_script.sh"
+# TESTS=
+#   echo "`./complex_script.sh`"
+# [7004-END]
+
+[7005]
+NAME="Antislash échappant des quotes et des backticks imbriqués \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "`echo \"Escaping \\\"quotes\\\" and \\`backticks\\`\"`"
+[7005-END]
+
+[7006]
+NAME="Utilisation combinée de backticks, antislashs et pipelines \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "`echo \"Pipeline test | \\`echo Nested\\` | End\"`"
+[7006-END]
+
+[7007]
+NAME="Antislashs complexes dans un chemin avec backticks \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "`echo \"Path: /home/user\\\\directory\\\\file\\\\`echo Nested\\\\name\\`\"`"
+[7007-END]
+
+[8001]
+NAME="alias"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  alias foo "echo markiplier"
+  foo
+  unalias foo
+  foo
+[8001-END]
+
+[8002]
+NAME="alias with backticks"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  alias foo "`echo markiplier`"
+  foo
+  unalias foo
+  foo
+[8002-END]
+
+[8003]
+NAME="local variables"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  set foo="markiplier"
+  echo $foo
+  unset foo
+  echo $foo
+[8003-END]
+
+[8004]
+NAME="basic variable assignment"
+SETUP=""
+CLEAN=""
+TESTS=
+  set testvar="hello world"
+  echo $testvar
+[8004-END]
+
+[8005]
+NAME="variable with special characters"
+SETUP=""
+CLEAN=""
+TESTS=
+  set special="var!@#$%^&*()_+-=[]{}|;:',.<>/?~"
+  echo $special
+[8005-END]
+
+[8006]
+NAME="unset variable"
+SETUP=""
+CLEAN=""
+TESTS=
+  set tempvar="exists"
+  unset tempvar
+  echo $tempvar
+[8006-END]
+
+[8007]
+NAME="local vs environment variables"
+SETUP="export GLOBAL=global"
+CLEAN="unset GLOBAL"
+TESTS=
+  set LOCAL=local
+  echo $GLOBAL $LOCAL
+[8007-END]
+
+[8008]
+NAME="variable persistence across commands"
+SETUP=""
+CLEAN=""
+TESTS=
+  set persist="first"
+  echo $persist
+  set persist="second"
+  echo $persist
+[8008-END]
+
+[8009]
+NAME="empty variable"
+SETUP=""
+CLEAN=""
+TESTS=
+  set empty=""
+  echo -n $empty
+[8009-END]
+
+[8010]
+NAME="variable name with numbers"
+SETUP=""
+CLEAN=""
+TESTS=
+  set var123="numeric"
+  echo $var123
+[8010-END]
+
+[8011]
+NAME="spaces around equals"
+SETUP=""
+CLEAN=""
+TESTS=
+  set spaced = "value"
+  echo $spaced
+[8011-END]
+
+[8012]
+NAME="variables with newlines"
+SETUP=""
+CLEAN=""
+TESTS=
+  set multiline="line1
+line2"
+  echo "$multiline"
+[8012-END]
+
+[8013]
+NAME="variables with quotes"
+SETUP=""
+CLEAN=""
+TESTS=
+  set quoted='"double" and '\''single'\'' quotes'
+  echo $quoted
+[8013-END]
+
+[8014]
+NAME="multiple variables"
+SETUP=""
+CLEAN=""
+TESTS=
+  set var1="first"
+  set var2="second"
+  echo $var1 $var2
+[8014-END]
+
+[8015]
+NAME="variable substitution"
+SETUP="set base=/usr/local"
+CLEAN="unset base"
+TESTS=
+  set path="$base/bin"
+  echo $path
+[8015-END]
+
+[8016]
+NAME="invalid variable name"
+SETUP=""
+CLEAN=""
+TESTS=
+  set 123invalid=value
+[8016-END]
+
+[8017]
+NAME="unset non-existent variable"
+SETUP=""
+CLEAN=""
+TESTS=
+  unset nosuchvar
+[8017-END]
+
+[8018]
+NAME="nested variable expansion"
+SETUP="set outer=inner"
+CLEAN="unset outer inner"
+TESTS=
+  set inner=value
+  echo ${$outer}
+[8018-END]
+
+[8019]
+NAME="command substitution in variables"
+SETUP=""
+CLEAN=""
+TESTS=
+  set date=$(date +%Y)
+  echo $date
+[8019-END]
+
+[9000]
+NAME="Command substitution with $()"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(echo Hello) World"
+[9000-END]
+
+[9001]
+NAME="Nested command substitution with $()"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(echo Outer $(echo Inner) Command)"
+[9001-END]
+
+[9002]
+NAME="Command substitution with failing command"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(nonexistent_command) should not crash"
+[9002-END]
+
+[9003]
+NAME="Command substitution with multiple lines"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(echo Line1; echo Line2)"
+[9003-END]
+
+[9004]
+NAME="Command substitution in heredoc"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "cat <<EOF"
+  echo "Date: $(date)"
+  echo "EOF"
+[9004-END]
+
+[9005]
+NAME="Complex variable expansion with default values \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  unset VAR
+  echo "${VAR:-default}"
+  set VAR=""
+  echo "${VAR:-default}"
+  set VAR="value"
+  echo "${VAR:-default}"
+[9005-END]
+
+[9006]
+NAME="Variable expansion with substring"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  set VAR="abcdefgh"
+  echo "${VAR:2:4}"
+[9006-END]
+
+[9007]
+NAME="Pipe with multiple builtins \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "setenv TEST=hello | echo piped | wc -l"
+[9007-END]
+
+[9008]
+NAME="Heredoc with quoted delimiter (no expansion)"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; export VAR=hello"
+CLEAN=""
+TESTS=
+  echo "cat <<'EOF'"
+  echo "$VAR should not expand"
+  echo "EOF"
+[9008-END]
+
+[9009]
+NAME="Multiple redirections in one command \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="rm -f output.txt errors.txt"
+TESTS=
+  echo "ls /etc /doesnotexist > output.txt 2> errors.txt"
+  echo "cat output.txt"
+  echo "cat errors.txt"
+[9009-END]
+
+[9010]
+NAME="Redirection with append and input"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; echo 'Input data' > input.txt"
+CLEAN="rm -f input.txt output.txt"
+TESTS=
+  echo "cat < input.txt >> output.txt"
+  echo "cat output.txt"
+[9010-END]
+
+[9011]
+NAME="Logical operators with subshells \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "(false || echo Subshell success) && echo Main shell success"
+[9011-END]
+
+[9012]
+NAME="Complex alias with pipes and redirections"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="unalias complex_alias ; rm -f output.txt"
+TESTS=
+  alias complex_alias "ls /etc | grep sh > output.txt"
+  complex_alias
+  echo "cat output.txt"
+  unalias complex_alias
+  complex_alias
+[9012-END]
+
+[9013]
+NAME="Alias with arguments"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="unalias ls_args"
+TESTS=
+  alias ls_args "ls -l"
+  ls_args /etc
+  unalias ls_args
+  ls_args /etc
+[9013-END]
+
+[9014]
+NAME="Invalid alias name"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  alias 123invalid="echo test"
+[9014-END]
+
+[9015]
+NAME="Recursive alias"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="unalias recursive"
+TESTS=
+  alias recursive "recursive"
+  recursive
+[9015-END]
+
+# [9016]
+# NAME="Variable expansion in command substitution"
+# SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; export DIR=/etc"
+# CLEAN=""
+# TESTS=
+#   echo "$(ls $DIR)"
+# [9016-END]
+
+[9017]
+NAME="Backticks vs $() comparison"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "`echo Backtick` vs $(echo Dollar)"
+[9017-END]
+
+[9018]
+NAME="Multiple pipes with failing command in middle \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls /bin | nonexistent_command | wc -l"
+[9018-END]
+
+[9019]
+NAME="Heredoc with pipe and redirection \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="rm -f output.txt"
+TESTS=
+  echo "cat <<EOF | grep Hello > output.txt"
+  echo "Hello World"
+  echo "Goodbye"
+  echo "EOF"
+  echo "cat output.txt"
+[9019-END]
+
+[9020]
+NAME="Command substitution in variable assignment"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  set VAR="$(echo Nested $(echo Command))"
+  echo $VAR
+[9020-END]
+
+[9021]
+NAME="Logical operators with empty commands \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "true && || echo Should not print"
+[9021-END]
+
+[9022]
+NAME="Redirection with non-existent file in pipe"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="rm -f output.txt"
+TESTS=
+  echo "cat nonexistent.txt | grep test > output.txt"
+  echo "cat output.txt"
+[9022-END]
+
+[9023]
+NAME="Complex nested subshells with pipes"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "(ls /bin | (grep sh | wc -l))"
+[9023-END]
+
+[9024]
+NAME="Variable unset in subshell"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; export VAR=parent"
+CLEAN=""
+TESTS=
+  echo "(unset VAR; echo \$VAR); echo \$VAR"
+[9024-END]
+
+[9025]
+NAME="Invalid variable name in setenv"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "setenv 123invalid value"
+[9025-END]
+
+[9026]
+NAME="Multiple heredocs in one command \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "cat <<EOF1 <<EOF2"
+  echo "First heredoc"
+  echo "EOF1"
+  echo "Second heredoc"
+  echo "EOF2"
+[9026-END]
+
+[9027]
+NAME="Heredoc with empty delimiter \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "cat <<"
+  echo "Should fail"
+  echo ""
+[9027-END]
+
+[9028]
+NAME="Command substitution with special characters"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(echo \"Special chars: & * \$ # @!\")"
+[9028-END]
+
+[9029]
+NAME="Pipe with subshell and redirection"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="rm -f output.txt"
+TESTS=
+  echo "(ls /etc | grep sh) > output.txt"
+  echo "cat output.txt"
+[9029-END]
+
+[9030]
+NAME="Logical operators with command substitution \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(false) || echo Fallback"
+[9030-END]
+
+[9031]
+NAME="Alias with command substitution"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="unalias date_alias"
+TESTS=
+  alias date_alias "echo $(date)"
+  date_alias
+  unalias date_alias
+  date_alias
+[9031-END]
+
+[9032]
+NAME="Variable expansion with unset variable \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  unset VAR
+  echo "Value: $VAR"
+[9032-END]
+
+[9033]
+NAME="Backslash escaping in heredoc \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "cat <<EOF"
+  echo "\\\$VAR \\t \\n"
+  echo "EOF"
+[9033-END]
+
+[9034]
+NAME="Command substitution in redirection"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="rm -f $(whoami).txt"
+TESTS=
+  echo "echo Test > $(whoami).txt"
+  echo "cat $(whoami).txt"
+[9034-END]
+
+[9035]
+NAME="Multiple logical operators with subshells \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "(true || false) && (false || echo Success)"
+[9035-END]
+
+[9036]
+NAME="Pipe with heredoc input \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "grep test <<EOF | wc -l"
+  echo "test line"
+  echo "no match"
+  echo "EOF"
+[9036-END]
+
+[9037]
+NAME="Invalid redirection syntax \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "ls > > output.txt"
+[9037-END]
+
+[9038]
+NAME="Command substitution with backslash escaped characters \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(echo \"Escaped \\t tab and \\n newline\")"
+[9038-END]
+
+[9039]
+NAME="Alias with logical operators"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="unalias logic_alias"
+TESTS=
+  alias logic_alias "true && echo Success"
+  logic_alias
+  unalias logic_alias
+  logic_alias
+[9039-END]
+
+[9040]
+NAME="Heredoc with command substitution and variable"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; export VAR=world"
+CLEAN=""
+TESTS=
+  echo "cat <<EOF"
+  echo "Hello $(echo $VAR)"
+  echo "EOF"
+[9040-END]
+
+[10000]
+NAME="Simple globbing with *"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; mkdir testglob ; touch testglob/file1 testglob/file2 testglob/file.txt"
+CLEAN="rm -rf testglob"
+TESTS=
+  echo "ls testglob/*"
+[10000-END]
+
+[10001]
+NAME="Globbing with ? and no match \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; mkdir testglob ; touch testglob/file1 testglob/file2"
+CLEAN="rm -rf testglob"
+TESTS=
+  echo "ls testglob/file?"
+  echo "ls testglob/nomatch?"
+[10001-END]
+
+[10002]
+NAME="Globbing with character class"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; mkdir testglob ; touch testglob/filea testglob/fileb testglob/filec testglob/filex"
+CLEAN="rm -rf testglob"
+TESTS=
+  echo "ls testglob/file[abc]"
+[10002-END]
+
+[10003]
+NAME="Background job execution"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "sleep 1 &"
+  echo "jobs"
+[10003-END]
+
+[10004]
+NAME="History expansion with !! \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "echo Previous"
+  echo "!!"
+[10004-END]
+
+[10005]
+NAME="History substitution \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "echo Test"
+  echo "^Test^Success^"
+[10005-END]
+
+[10006]
+NAME="Complex quotes with variables \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; export VAR=world"
+CLEAN=""
+TESTS=
+  echo 'echo "Hello $VAR" '\''Single $VAR'\'''
+[10006-END]
+
+[10007]
+NAME="tcsh where command \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "where ls"
+[10007-END]
+
+[10008]
+NAME="tcsh which command \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "which ls"
+[10008-END]
+
+[10009]
+NAME="tcsh limit command \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "limit stacksize"
+[10009-END]
+
+[10010]
+NAME="source a script"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; echo 'set VAR=sourced' > script.tcsh"
+CLEAN="rm -f script.tcsh"
+TESTS=
+  echo "source script.tcsh"
+  echo "echo $VAR"
+[10010-END]
+
+[10011]
+NAME="Special variable $?"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "true"
+  echo "echo $?"
+  echo "false"
+  echo "echo $?"
+[10011-END]
+
+[10012]
+NAME="Permission denied error"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; echo 'test' > testfile ; chmod 000 testfile"
+CLEAN="rm -f testfile"
+TESTS=
+  echo "cat testfile"
+[10012-END]
+
+[10013]
+NAME="Redirection of file descriptor 3 \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="rm -f output.txt"
+TESTS=
+  echo "exec 3> output.txt"
+  echo "echo Hello >&3"
+  echo "cat output.txt"
+[10013-END]
+
+[10014]
+NAME="Combined stdout and stderr redirection \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN="rm -f combined.txt"
+TESTS=
+  echo "ls /etc /doesnotexist >& combined.txt"
+  echo "cat combined.txt"
+[10014-END]
+
+[10015]
+NAME="Script arguments \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; echo 'echo Arg1: \$1 Arg2: \$2' > script.tcsh ; chmod +x script.tcsh"
+CLEAN="rm -f script.tcsh"
+TESTS=
+  echo "./script.tcsh hello world"
+[10015-END]
+
+[10016]
+NAME="Shift arguments \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; echo 'echo Before: \$* ; shift ; echo After: \$*' > script.tcsh ; chmod +x script.tcsh"
+CLEAN="rm -f script.tcsh"
+TESTS=
+  echo "./script.tcsh arg1 arg2 arg3"
+[10016-END]
+
+[10017]
+NAME="tcsh function definition \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "function myfunc () { echo Hello \$1; }"
+  echo "myfunc world"
+[10017-END]
+
+[10018]
+NAME="Arithmetic expansion \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "echo \$[2 + 3 * 4]"
+[10018-END]
+
+[10019]
+NAME="Prompt customization"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "set prompt='%~> '"
+  echo "echo $prompt"
+[10019-END]
+
+[10020]
+NAME="Invalid syntax with unbalanced parentheses \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "(ls /etc"
+[10020-END]
+
+[10021]
+NAME="Command too long \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "$(printf 'a%.0s' {1..10000})"
+[10021-END]
+
+[10022]
+NAME="Globbing with brace expansion \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; mkdir testglob ; touch testglob/file{a,b,c}.txt"
+CLEAN="rm -rf testglob"
+TESTS=
+  echo "ls testglob/file{a,b,c}.txt"
+[10022-END]
+
+[10023]
+NAME="Signal handling with Ctrl+C \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "trap 'echo Interrupted' INT"
+  echo "sleep 10"
+  echo "echo After sleep"
+[10023-END]
+
+[10024]
+NAME="Variable array in tcsh \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo "set myarray=(one two three)"
+  echo "echo \$myarray[2]"
+[10024-END]
+
+[10025]
+NAME="Heredoc with function call \e[33mKO\e[0m"
+SETUP="export TERM=xterm ; PATH='/bin:/usr/bin' ; function myfunc () { echo Hello \$1; }"
+CLEAN=""
+TESTS=
+  echo "cat <<EOF"
+  echo "\$(myfunc world)"
+  echo "EOF"
+[10025-END]

@@ -31,7 +31,7 @@ static int process_command(tree_t *tree)
     return NOERROR;
 }
 
-int execute_tree(tree_t *tree, int *result, Global_t *global)
+int execute_tree(tree_t *tree, int *result, global_t *global)
 {
     int res;
 

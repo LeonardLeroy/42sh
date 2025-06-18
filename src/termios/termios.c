@@ -7,7 +7,24 @@
 
 #include "header.h"
 
-int read_input(char *buffer, Global_t *global)
+static int handle_enter_key(char *suggestion, char *buffer,
+    global_t *global, int *pos)
+{
+    free(suggestion);
+    return key_gestion_enter(buffer, global, pos);
+}
+
+static void update_suggestion(char *buffer, global_t *global,
+    char **suggestion)
+{
+    if (*suggestion) {
+        free(*suggestion);
+        *suggestion = NULL;
+    }
+    *suggestion = get_suggestion(buffer, global);
+}
+
+int read_input(char *buffer, global_t *global)
 {
     int pos = 0;
     char c;
@@ -21,30 +38,9 @@ int read_input(char *buffer, Global_t *global)
             continue;
         }
         if (c == '\n')
-            return key_gestion_enter(buffer, global, &pos);
+            return handle_enter_key(suggestion, buffer, global, &pos);
         key_gestion(c, &pos, buffer, global);
-        suggestion = get_suggestion(buffer, global);
+        update_suggestion(buffer, global, &suggestion);
     }
     return NOERROR;
 }
-
-// int read_input(char *buffer, Global_t *global)
-// {
-//     int pos = 0;
-//     char c;
-
-//     while (TRUE) {
-//         if (read(STDIN_FILENO, &c, 1) != 1)
-//             continue;
-//         switch (c) {
-//             case '\n':
-//                 return key_gestion_enter(buffer, global, &pos);
-//             case 12:
-//                 strcpy(buffer, "clear");
-//                 return NOERROR;
-//             default:
-//                 key_gestion(c, &pos, buffer, global);
-//         }
-//     }
-//     return NOERROR;
-// }

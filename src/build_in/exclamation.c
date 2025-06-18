@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-static int execute_one_line(Global_t *global, char *INPUT)
+static int execute_one_line(global_t *global, char *INPUT)
 {
     int result = NOERROR;
     tree_t *tree;
@@ -23,7 +23,7 @@ static int execute_one_line(Global_t *global, char *INPUT)
     return result;
 }
 
-int exclamation_command(Global_t *global, char *input)
+int exclamation_command(global_t *global, char *input)
 {
     size_t len = my_strlen(input) - 1;
     char *new_input = NULL;

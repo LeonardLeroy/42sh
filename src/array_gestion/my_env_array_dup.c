@@ -11,7 +11,6 @@ char **my_env_array_dup(char **array, int size)
 {
     char **result = emalloc(sizeof(char *) * (size + 1));
 
-    DEBUG("size: %d\n", size);
     if (!result)
         return NULL;
     for (int i = 0; i < size; i++)

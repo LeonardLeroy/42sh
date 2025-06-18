@@ -7,10 +7,10 @@
 
 #include "header.h"
 
-int get_command(char **input, int iserror, Global_t *global)
+int get_command(char **input, int iserror, global_t *global)
 {
     size_t size = 0;
-    char buffer[MAXINPUT];
+    char buffer[MAXINPUT] = "";
     int result;
 
     if (isatty(STDIN_FILENO)) {
@@ -22,5 +22,7 @@ int get_command(char **input, int iserror, Global_t *global)
         for (int i = 0; i < my_strlen(*input); i++)
             (*input)[i] = ((*input)[i] == '\n' ? '\0' : (*input)[i]);
     }
+    if (*input && strstr(*input, "<<"))
+        gestion_multi_lines(input, global);
     return result;
 }

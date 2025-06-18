@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-int key_gestion_enter(char *buffer, Global_t *global, int *pos)
+int key_gestion_enter(char *buffer, global_t *global, int *pos)
 {
     display_with_suggestion(buffer, NULL, *pos);
     buffer[global->size_prompt] = '\0';

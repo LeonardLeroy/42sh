@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-static char *find_var_from_env(Global_t *global, char *var)
+static char *find_var_from_env(global_t *global, char *var)
 {
     int var_len = my_strlen(var);
 
@@ -17,7 +17,7 @@ static char *find_var_from_env(Global_t *global, char *var)
     return NULL;
 }
 
-static int echo_var(Global_t *global, char **args, int *ret)
+static int echo_var(global_t *global, char **args, int *ret)
 {
     char *tmp;
 
@@ -38,7 +38,7 @@ static int echo_var(Global_t *global, char **args, int *ret)
     return 0;
 }
 
-int echo_command(char *input, Global_t *global, int *ret)
+int echo_command(char *input, global_t *global, int *ret)
 {
     pid_t pid;
     char **args;

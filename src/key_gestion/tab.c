@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-int key_gestion_tab(char *suggestion, char *buffer, int *pos, Global_t *global)
+int key_gestion_tab(char *suggestion, char *buffer, int *pos, global_t *global)
 {
     int len = strlen(suggestion);
     int buf_len = strlen(buffer);
@@ -23,5 +23,6 @@ int key_gestion_tab(char *suggestion, char *buffer, int *pos, Global_t *global)
     }
     buffer[temp] = '\0';
     display_with_suggestion(buffer, NULL, *pos);
+    free(last_word);
     return NOERROR;
 }

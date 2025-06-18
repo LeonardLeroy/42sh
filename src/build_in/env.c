@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-int env_command(Global_t *global)
+int env_command(global_t *global)
 {
     if (global->env)
         for (int i = 0; global->env[i] != NULL; i++)

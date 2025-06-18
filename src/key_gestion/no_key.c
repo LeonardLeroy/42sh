@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-void no_key_gestion(int *pos, char *buffer, char c, Global_t *global)
+void no_key_gestion(int *pos, char *buffer, char c, global_t *global)
 {
     char *suggestion;
 
@@ -24,7 +24,7 @@ void no_key_gestion(int *pos, char *buffer, char c, Global_t *global)
     }
 }
 
-// void no_key_gestion(int *pos, char *buffer, char c, Global_t *global)
+// void no_key_gestion(int *pos, char *buffer, char c, global_t *global)
 // {
 //     if (*pos < MAXINPUT - 1) {
 //         for (int i = global->size_prompt; i > *pos; i--)
